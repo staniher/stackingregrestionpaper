@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet">
+
+    <!-- N.B: The css files must be called as follows: -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/icomoon/style.css') }}">   
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Stacking Regression</title>
+  </head>
+  <body>
+  <div class="content">
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 mr-auto">
+          <h3 class="mb-3">LOS Prediction/Stacking</h3>
+          <p style="text-align:justify;"> This project predicts a patient's length of stay and discharge date based 
+		  on his/her age, gender, the Service he/she is in, and the disease he/she has.</p>
+		  <p style="color:red;">We used 8 different models to find the one that best predicts our problem. These models are the following:</p>
+		  <p style="text-align:justify;">Random Forest Regressor, XGBoost, Extra Trees Regressor, Decision Tree Regressor
+		 , Light GBM, MLP Regression, Suport Vector Regressor, Stacking Regressor.</p>
+		  <p style="text-align:justify;">However, the final model is made using Stacking regression which is combining (Random Forest Regressor,
+		  XGBoost, Extra Trees Regressor, Decision Tree Regressor, Light GBM, and SVR)
+           N.B: For Patients less than one year old, please convert the days (age) numbers 
+		  to years. For example, if a Patient has 10 days as age, do 10/365 to get his age in year.</p>
+		  <p style="text-align:justify;">If you have liked this project, please contact us via this address <a href="#">staniher@yahoo.fr</a></p>
+          
+        </div>
+
+        <div class="col-md-6">
+          <div class="box">
+            <h3 class="heading">Enter data to predict a patient's discharge date from hospital</h3>
+			<div style='text-align:center;font-size:15px;color:#f00';line-height: 0.8>
+			    <!-- Nous affichons ici les resultats de prediction -->
+				{{ prediction_text }} 
+				</div>
+				<!-- Nous precisons predict qui vient du code Flask comme action de notre formulaire html -->
+            <form class="mb-5" action="{{url_for('predict')}}" method="post" id="contactForm" name="contactForm">
+              <div class="row">
+                
+                <div class="col-md-6 form-group">
+                  <label for="name" class="col-form-label">Gender of the Patient *</label>
+                  <select class="custom-select" id="budget" name="genre" required>
+					<option selected>Choose...</option>
+					<option value="1">M</option>
+					<option value="0">F</option>
+					</select>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="name" class="col-form-label">Age of the Patient *</label>
+                  <input type="number" class="form-control" name="age" id="organization" placeholder="Example: 50" required>
+                </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-12 form-group">
+                  <label for="budget" class="col-form-label">Disease *</label>
+                  <select class="custom-select" id="budget" name="disease" required>
+					<option selected>Choose...</option>
+					<option value="0">Abortion</option>
+					<option value="1">Acute Gastritis</option>
+					<option value="2">Acute bronchitis</option>
+					<option value="3">Acute encephalitis</option>
+					<option value="4">Acute enteritis</option>
+					<option value="5">Acute febrile gastroenteritis</option>
+					<option value="6">Acute gastroenteritis</option>
+					<option value="7">Afebrile</option>
+					<option value="8">Agnosia</option>
+					<option value="9">Allergy</option>
+					<option value="10">Appendicular</option>
+					<option value="11">Arteriovenous malformation</option>
+					<option value="12">Asphyxiated preemie</option>
+					<option value="13">Bilateral hernia</option>
+					<option value="14">Bronchitis</option>
+					<option value="15">Chronic valvular disease</option>
+					<option value="16">Cold and bronchitis</option>
+					<option value="17">Diabetes</option>
+					<option value="18">Digestive tract</option>
+					<option value="19">Dyspeptic and emotional shock</option>
+					<option value="20">Emotional trauma</option>
+					<option value="21">Extreme prematurity</option>
+					<option value="22">Facial fall</option>
+					<option value="23">Febrile enteritis</option>
+					<option value="24">Febrile gastroenteritis</option>
+					<option value="25">Fever</option>
+					<option value="26">Flu</option>
+					<option value="27">Flu and malaria</option>
+					<option value="28">Focal Cortical Dysplasia</option>
+					<option value="29">Gastritis</option>
+					<option value="30">Hernia</option>
+					<option value="31">Hypertension crisis</option>
+					<option value="32">Hypothermia</option>
+					<option value="33">Hypotrophy</option>
+					<option value="34">Incomplete abortion</option>
+					<option value="35">Infection</option>
+					<option value="36">Infection and Diabetes</option>
+					<option value="37">Infectious Mononucleosis</option>
+					<option value="38">Infectious risk</option>
+					<option value="39">Influenza</option>
+					<option value="40">Losartan effect</option>
+					<option value="41">Low birth weight</option>
+					<option value="42">Macrosomia</option>
+					<option value="43">Malaria</option>
+					<option value="44">Medium prematurity</option>
+					<option value="45">Mocking seizure</option>
+					<option value="46">Neonatal asphyxia</option>
+					<option value="47">Neonatal infection</option>
+					<option value="48">Obstetrical pathology</option>
+					<option value="49">Pelvic trauma</option>
+					<option value="50">Peptic ulcer</option>
+					<option value="51">Polytrauma</option>
+					<option value="52">Post-partum infection</option>
+					<option value="53">Pregnancy discomfort</option>
+					<option value="54">Probable acute cystitis</option>
+					<option value="55">Probable late vision</option>
+					<option value="56">Respiratory distress</option>
+					<option value="57">Rheumatism</option>
+					<option value="58">Right Ovarian Cyst</option>
+					<option value="59">Salmonellosis</option>
+					<option value="60">Senile Dementia</option>
+					<option value="61">Sepsis</option>
+					<option value="62">Severe malaria</option>
+					<option value="63">Short-term fever</option>
+					<option value="64">Threat of preterm birth</option>
+					<option value="65">Uterine infection</option>
+					<option value="66">Uterine myoma</option>
+					<option value="67">Vaginal mycoses</option>
+					
+					</select>
+                </div>
+              </div>
+              <div class="row mb-3">
+			  <div class="col-md-12 form-group">
+                  <label for="email" class="col-form-label">Service to which the Patient is admitted *</label>
+                   <select class="custom-select" id="budget" name="service" required>
+					<option selected>Choose...</option>
+					<option value="0">Pediatrics</option>
+					<option value="1">Hospitalization</option>
+					<option value="2">Gynecology</option>
+					<option value="3">Neonatology</option>
+					</select>
+                </div>
+               
+                <div class="col-md-12 form-group">
+                  <label for="message" class="col-form-label">Date of admission to hospital *</label>
+                  <input type="date" class="form-control" name="date" id="date" placeholder="Example: January 15th" required>
+               
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  
+				  <button class="btn btn-block btn-primary rounded-0 py-2 px-4" id='submit' type="submit" value="Submit">Predict</button>
+                  <span class="submitting"></span>
+                </div>
+              </div>
+            </form>
+
+            <div id="form-message-warning mt-4"></div> 
+
+          </div>
+        </div>
+      </div>
+  </div>
+    
+    
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/main.js"></script>
+
+  </body>
+</html>

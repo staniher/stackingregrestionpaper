@@ -14,5 +14,5 @@ sklearn
 gunicorn
 datetime
 mlxtend
-xgboost
+xgboost==1.4.2
 lightgbm

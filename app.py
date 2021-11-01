@@ -22,7 +22,7 @@ def predict():
     #We get all the values of the list (Gender, Age, Disease, Service) except the last one 
     features_model = [string_features[0],string_features[1],string_features[2],string_features[3]]
     #We convert all our features to float
-    #features_model=[float(j) for j in features_model]
+    features_model=[float(j) for j in features_model]
     #We reshape the features to make it an np vector able to be introduced in the model for prediction
     features_model=np.array([features_model]).reshape(1,4)
     #We predict using the model that has been loaded above

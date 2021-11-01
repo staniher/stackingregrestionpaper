@@ -14,3 +14,5 @@ sklearn
 gunicorn
 datetime
 mlxtend
+xgboost
+lightgbm
